@@ -1,0 +1,2 @@
+mgs465370	https://api.mg-rast.org/sample/mgs465370?verbosity=full
+mgs465373	https://api.mg-rast.org/sample/mgs465373?verbosity=full
