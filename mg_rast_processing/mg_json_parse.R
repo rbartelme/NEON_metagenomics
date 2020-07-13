@@ -1,8 +1,10 @@
+#!/usr/bin/env Rscript
+
 library(jsonlite)
 library(tidyverse)
 
 # read in JSON file
-neon_mg_json <- read_json("mg_rast_processing/NEON_soil_metagenomes.json")
+neon_mg_json <- read_json("~/NEON_metagenomics/mg_rast_processing/NEON_soil_metagenomes.json")
 
 # make tibble from samples
 samples_tib <- as_tibble(neon_mg_json$samples, validate = FALSE)
