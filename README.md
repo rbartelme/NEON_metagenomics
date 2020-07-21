@@ -3,9 +3,17 @@
 
 ---
 
-### NEON Metagenome Access
+### NEON Metagenome Query through MG-RAST
 
-1. Pulled project json sequence file metadata with: `curl -X GET -H "auth: your_mg_rast_API_key" "https://api.mg-rast.org/project/mgp13948?verbosity=full" > NEON_soil_metagenomes.json` 
+**NOTE: all curl actions require an MG-RAST API key**
+
+1. Pulled project json sequence file metadata with: `curl -X GET -H "auth: your_mg_rast_API_key" "https://api.mg-rast.org/project/mgp13948?verbosity=full" > NEON_soil_metagenomes.json`
+
+2. Parsed project `NEON_soil_metagenomes.json` file with Rscript `mg_json_parse.R`. This extracted the MG-RAST sample accessions in a tabular format.
+
+3. Tabular MG-RAST sample accessions were used in a while bash loop, `sample_curl.sh`, with bash white space parsing, to `curl` download individual `*.json` files for each sample.
+
+4. The sample `*.json` files were then cross referenced with the NEON API listing for each study site with the Rscript `neon_sample_tabulate.R`
 
 ---
 
