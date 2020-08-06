@@ -7,7 +7,9 @@
 ### NEON Query with R library `neonUtilities`
 
 1. `microbe_metadata.R` in `/neon_query/` will pull metadata
-  & sequence FASTQ data from NEON DAta Portal 
+  & sequence FASTQ data from NEON Data Portal
+
+2. Data will be used in a larger workflow
 
 ---
 
