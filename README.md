@@ -1,11 +1,22 @@
 # GenoPhenoEnvo Project
 ## *Connecting Microorganisms to Macrofloral Phenotypes and the Environment*
 
+
+---
+
+### NEON Query with R library `neonUtilities`
+
+1. `microbe_metadata.R` in `/neon_query/` will pull metadata
+  & sequence FASTQ data from NEON DAta Portal 
+
 ---
 
 ### NEON Metagenome Query through MG-RAST
 
 **NOTE: all curl actions require an MG-RAST API key**
+
+**NOTE 2: These data are not as up to date as those
+available through the NEON R API**
 
 1. Pulled project json sequence file metadata with: `curl -X GET -H "auth: your_mg_rast_API_key" "https://api.mg-rast.org/project/mgp13948?verbosity=full" > NEON_soil_metagenomes.json`
 
