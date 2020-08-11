@@ -7,11 +7,11 @@ library(neonUtilities)
 # Set output directory, relative path to Rproj
 outDir <- "~/NEON_metagenomics/test_out/"
 
-# Set API key?
-
+# Set API key
+NEON_TOKEN <- Sys.getenv(x = "NEON_TOKEN")
 # Soil Field Data - soil physical properties
 L1sls <- loadByProduct(startdate = "2016-01", enddate = "2017-01",
-                       dpID = 'DP1.10086.001', check.size = FALSE)
+                       dpID = 'DP1.10086.001', token = NEON_TOKEN, check.size = FALSE, nCores = 3)
 
 
 ##### NOTES #######
