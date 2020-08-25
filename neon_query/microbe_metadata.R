@@ -7,28 +7,41 @@ library(neonUtilities)
 # Set output directory, relative path to Rproj
 outDir <- "~/NEON_metagenomics/test_out/"
 
-# Set API key
-NEON_TOKEN <- Sys.getenv(x = "NEON_TOKEN")
-# Soil Field Data - soil physical properties
-L1sls <- loadByProduct(startdate = "2016-01", enddate = "2017-01",
-                       dpID = 'DP1.10086.001', token = NEON_TOKEN, check.size = FALSE, nCores = 3)
-
-
 ##### NOTES #######
 # This will need to filter by the sites that we are interested in *BEFORE* 
-  # we end up pulling the microbiome data 
+# we end up pulling the microbiome data 
 # qPCR Total Abundances of total archaea, bacteria, and fungi : DP1.10109.001
 # Microbe biomass: DP1.10104.001
 # Soil Microbe Marker Gene Sequences: DP1.10108.001
 # Soil Microbe Metagenome Sequences: DP1.10107.001
 # Soil Phyical Properties: DP1.10086.001
 
-# Fetch soil microbe data (or anay data) from start date to end date
-L1mic <- loadByProduct(startdate = "2016-09", enddate = "2017-01", dpID = 'DP1.10108.001', 
-                       package = 'expanded', check.size = FALSE)
-L1mic.dna <- L1mic$mmg_soilDnaExtraction   # read in soilDnaExtraction L1 data
+# Set API key
+NEON_TOKEN <- Sys.getenv(x = "NEON_TOKEN")
+
+# Fetch metadata for shotgun metagenomes
+sg_met <- loadByProduct(startdate = "2013-06", enddate = "2019-09",
+                       dpID = 'DP1.10107.001', package = 'expanded',
+                       token = NEON_TOKEN, check.size = FALSE, nCores = 3)
+
+
+
+
+# Fetch soil microbe marker gene sequence data
+marker_genes <- loadByProduct(startdate = "2013-06", enddate = "2019-09",
+                            dpID = 'DP1.10108.001', package = 'expanded', 
+                            token = NEON_TOKEN, check.size = FALSE, nCores = 3)
+
+
+
+
+
+marker_genes_dna <- marker_genes$mmg_soilDnaExtraction   # read in soilDnaExtraction L1 data
+
+
+
 #grep filter sequence analysis by all types
-L1mic.dna <- L1mic.dna[grep("marker gene|marker gene and metagenomics", L1mic.dna$sequenceAnalysisType),]
+L1mic.dna <- marker_genes_dna[grep("marker gene|marker gene and metagenomics", marker_genes_dna$sequenceAnalysisType),]
 #make dnaSampleID upper case
 L1mic.dna$dnaSampleID <- toupper(L1mic.dna$dnaSampleID)
 
